@@ -1,8 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from database import get_db
+from app.database import get_db
 
 from app import schemas, services, repository
 
