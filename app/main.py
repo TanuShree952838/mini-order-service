@@ -9,11 +9,18 @@ app = FastAPI()
 
 @app.get("/products", response_model=list[schemas.ProductOut])
 def get_products(db: Session = Depends(get_db)):
+    """Fetch all available products."""
     return repository.get_all_products(db)
 
 
 @app.post("/orders")
 def submit_order(order: schemas.OrderSchema, db: Session = Depends(get_db)):
+    """
+    Place a new order:
+    - Validates products and stock
+    - Applies discounts and shipping
+    - Creates order and updates inventory
+    """
     try:
         subtotal = 0
         order_items = []
